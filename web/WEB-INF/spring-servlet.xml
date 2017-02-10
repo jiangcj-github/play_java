@@ -10,13 +10,13 @@
           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean-->
-    <context:component-scan base-package="com.example.package" />
+    <context:component-scan base-package="cool" />
 
     <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 -->
     <mvc:annotation-driven />
 
     <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
-    <bean id="viewResolver1"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value=""></property>
         <property name="suffix" value=".jsp"></property>
     </bean>

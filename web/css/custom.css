@@ -1,0 +1,25 @@
+/*custom bootstrap style*/
+
+body{margin:0px;padding: 0px;background: #F4F4F4;}
+
+.navbar{background: #ed5736;border-radius: 0px;border:none;}
+.navbar-header{margin-left:100px;}
+.navbar-brand{color: white !important;}
+.navbar-search{margin-right:150px;}
+.btn-search{background: transparent;margin-left: -40px;width: 40px;padding: 0px;border: none;}
+.btn-search:active{box-shadow: none !important;}
+.btn-search:focus{outline:none !important;}
+.form-search{ border-radius: 0px;border:none !important;width:300px !important;}
+
+img{border:none!important; }
+.wh{width:900px;margin:0 auto;}
+.fl{float:left;}
+.fr{float:right;}
+
+.top{font: 14px Arial,'微软雅黑';width:100%;height:30px;color:#5e5757;}
+.top  p{color:#5e5757;line-height:30px;width:50%;margin-bottom: 0px !important;}
+.top  p a{margin:0px 5px;line-height:30px;color:#5e5757;}
+.top  p.fr{text-align:right;}
+
+.nav-pills >li{text-align: center;}
+.nav-pills li>a{border-radius: 0px;}
