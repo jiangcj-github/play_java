@@ -14,15 +14,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 public class UserController {
 
-    @RequestMapping(path="/hello.do",method = RequestMethod.GET)
+    @RequestMapping(path="/hello.do1",method = RequestMethod.GET)
     @ResponseBody
     public String action(ModelAndView model) {
-        UriComponents uriComponents= UriComponentsBuilder.newInstance()
-                .scheme("http").host("example.com").path("/hotels/{hotel}/bookings/{booking}")
-                .build()
-                .expand("42", "21")
-                .encode();
-
-        return uriComponents.toUri().toString();
+        return "hello world";
     }
 }

@@ -15,13 +15,13 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring-servlet.xml</param-value>  默认
+            <param-value>/WEB-INF/spring-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
     <!-- 指定Spring Bean的配置文件所在目录,默认为/WEB-INF/applicationContext.xml,如果使用默认值，则必须新建applicationContext.xml -->

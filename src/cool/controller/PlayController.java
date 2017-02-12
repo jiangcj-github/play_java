@@ -1,20 +1,16 @@
-<?php
+package cool.controller;
 
-namespace App\Http\Controllers;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-use App\Util\Compile;
-use App\Util\Random;
-use Illuminate\Routing\Controller as BaseController;
-use Symfony\Component\HttpFoundation\Request;
-use Illuminate\Support\Facades\DB;
-
-use App\Util\TimeUtil;
-
-class PlayController extends BaseController
+@Controller
+public class PlayController
 {
-    
-
-    public function getPlay(Request $request){
+    @RequestMapping("/play")
+    public String getPlay(ModelMap model){
+        /*
         $video_id=$request->input("video",md5(sha1(1)));
         $result1=DB::select("select * from video where md5(sha1(id))=?",[$video_id]);
         if(count($result1)==0){
@@ -41,11 +37,15 @@ class PlayController extends BaseController
             "reply"=>$reply,
             "video_token"=>$video_token
         ]);
+        */
+        return "play-html5";
     }
 
+    @RequestMapping("/video")
+    @ResponseBody
+    public String getVideo(ModelMap model){
 
-    public function getVideo(Request $request){
-
+        /*
         //比较client_token与server_token是否一致
         $client_token=$request->input("token","");
         $server_token=session("video_token",Random::getRandString(40));
@@ -67,11 +67,8 @@ class PlayController extends BaseController
             return redirect($url);
         }
         return "404 Not Found";
-    }
-
-    public function getVideoFrame(Request $request){
-        $FFMPEG_CMD="ffmpeg -i '%s' -f image2 -t 0.01 -ss 0.1 -y ";
-        return passthru(sprintf($FFMPEG_CMD,"/mv/1.mp4"));
+        */
+        return "404";
     }
 
 }

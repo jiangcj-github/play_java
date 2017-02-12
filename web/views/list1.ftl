@@ -1,9 +1,6 @@
-
-@extends("main")
-@section("title","item1")
-
-@section("css")
-    @parent
+<@override name="title">item1</@override>
+<@override name="css">
+    <@super/>
     <style>
         .containDiv{
             width:100%;
@@ -26,10 +23,9 @@
             margin-right: 10px;
         }
     </style>
-@stop
-
-@section("rightDiv")
-    @parent
+</@override>
+<@override name="rightDiv">
+    <@super/>
     <div class="containDiv">
         <div class="rowDiv">
             <div class="unitDiv">
@@ -74,15 +70,15 @@
             </div>
         </div>
     </div>
-@stop
-
-@section("js")
-    @parent
+</@override>
+<@override name="js">
+    <@super/>
     <script>
         $(document).ready(function(){
-            //
-            $("#side_menu_item5").addClass("active");
-            $("#side_menu_item5>a").attr("href","#");
+        //
+        $("#side_menu_item1").addClass("active");
+        $("#side_menu_item1>a").attr("href","#");
         });
     </script>
-@stop
+</@override>
+<@extends name="main.ftl"></@extends>

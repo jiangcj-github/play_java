@@ -1,7 +1,5 @@
-@extends("nav")
-
-@section("css")
-    @parent
+<@override name="css">
+    <@super/>
     <style>
         #mainDiv{
             display: flex;
@@ -22,9 +20,8 @@
             height:2009px;
         }
     </style>
-@append
-
-@section("content")
+</@override>
+<@override name="content">
 <div id="mainDiv">
     <div id="sideDiv">
         <ul class="nav nav-pills nav-stacked" id="side_menu">
@@ -46,7 +43,8 @@
         </ul>
     </div>
     <div id="rightDiv">
-        @yield("rightDiv")
+        <@block name="rightDiv"></@block>
     </div>
 </div>
-@append
+</@override>
+<@extends name="navTop.ftl"></@extends>
