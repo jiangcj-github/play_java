@@ -75,9 +75,9 @@
     <@super/>
     <script>
         $(document).ready(function(){
-        //
-        $("#side_menu_item1").addClass("active");
-        $("#side_menu_item1>a").attr("href","#");
+            //
+            $("#side_menu_item1").addClass("active");
+            $("#side_menu_item1>a").attr("href","#");
         });
     </script>
 </@override>
