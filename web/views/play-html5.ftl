@@ -620,11 +620,9 @@
             <div id="loading"></div>
             <div id="error">加载视频出错</div>
             <video id="video">
-                <source src="/video?token={!! $video_token !!}" type="video/mp4" />
-                <!--
-                <source src="{!! $video->url !!}" type="video/ogg" />
-                <source src="{!! $video->url !!}" type="video/webm" />
-                -->
+                <source src="/video?token=${ video_token }" type="video/mp4" />
+                <source src="${ video.url }" type="video/ogg" />
+                <source src="${ video.url }" type="video/webm" />
             </video>
             <div class="controls">
                 <div class="btnPlay control-item"><i class="glyphicon glyphicon-play"></i></div>
@@ -663,44 +661,39 @@
             </div>
             <div id="maskDiv">
                 <div class="barageLine" id="line1">
-                    @foreach($barrage as $key=>$value)
-                    @if($loop->index%5!=0)
-                    @continue
-                    @endif
-                    <span style="left:{!! ($value->time-3)*50 !!}px">{!! $value->name !!}：{!! $value->text !!}</span>
-                    @endforeach
+                    <#list barrage as value>
+                        <#if x_index%5==0>
+                            <span style="left:${ (value.time-3)*50 }px">${ value.name }：${ value.text }</span>
+                        </#if>
+                    </#list>
                 </div>
                 <div class="barageLine" id="line2">
-                    @foreach($barrage as $key=>$value)
-                    @if($loop->index%5!=1)
-                    @continue
-                    @endif
-                    <span style="left:{!! ($value->time-3)*50 !!}px">{!! $value->name !!}：{!! $value->text !!}</span>
-                    @endforeach
+                    <#list barrage as value>
+                        <#if x_index%5==1>
+                            <span style="left:${ (value.time-3)*50 }px">${ value.name }：${ value.text }</span>
+                        </#if>
+                    </#list>
                 </div>
                 <div class="barageLine" id="line3">
-                    @foreach($barrage as $key=>$value)
-                    @if($loop->index%5!=2)
-                    @continue
-                    @endif
-                    <span style="left:{!! ($value->time-3)*50 !!}px">{!! $value->name !!}：{!! $value->text !!}</span>
-                    @endforeach
+                    <#list barrage as value>
+                        <#if x_index%5==2>
+                            <span style="left:${ (value.time-3)*50 }px">${ value.name }：${ value.text }</span>
+                        </#if>
+                    </#list>
                 </div>
                 <div class="barageLine" id="line4">
-                    @foreach($barrage as $key=>$value)
-                    @if($loop->index%5!=3)
-                    @continue
-                    @endif
-                    <span style="left:{!! ($value->time-3)*50 !!}px">{!! $value->name !!}：{!! $value->text !!}</span>
-                    @endforeach
+                    <#list barrage as value>
+                        <#if x_index%5==3>
+                            <span style="left:${ (value.time-3)*50 }px">${ value.name }：${ value.text }</span>
+                        </#if>
+                    </#list>
                 </div>
                 <div class="barageLine" id="line5">
-                    @foreach($barrage as $key=>$value)
-                    @if($loop->index%5!=4)
-                    @continue
-                    @endif
-                    <span style="left:{!! ($value->time-3)*50 !!}px">{!! $value->name !!}：{!! $value->text !!}</span>
-                    @endforeach
+                    <#list barrage as value>
+                        <#if x_index%5==4>
+                            <span style="left:${ (value.time-3)*50 }px">${ value.name }：${ value.text }</span>
+                        </#if>
+                    </#list>
                 </div>
                 <div class="barageLine" id="line6"></div>
             </div>
@@ -725,63 +718,63 @@
             <span style="margin-left:3px;margin-right: 3px;color:black;">|</span>
             <a href="javascript:void(0);">按热度</a>
         </div>
-        @foreach($comment as $key=>$value)
-        <div class="cl-item">
-            <img src="{!! $value->headimg !!}" class="headImg">
-            <div class="item-content">
-                <div class="ic-header">{!! $value->name !!}<span class="small">{!! $value->time !!}</span></div>
-                <div class="ic-main">{!! $value->text !!}</div>
-                <div class="ic-footer">
-                    <a href="javascript:void(0);">支持</a>&nbsp;({!! $value->suport !!})
-                    <span class="if_seperator">|</span>
-                    <a href="javascript:void(0);">反对</a>&nbsp;({!! $value->object !!})
-                    <span class="if_seperator">|</span>
-                    <a href="javascript:void(0);" onclick="$(this).parent().next().toggleClass('eject')">回复</a>
-                </div>
-                <div class="reply-input">
-                    <textarea rows="3" class="ri_text" id="{!! $value->id !!}"></textarea>
-                    <div class="ri_emotion"><img src="/img/laugh.png" style="width:24px;height:24px;"></div>
-                    <script>
-                        $('.ri_emotion img').qqFace({
-                            assign:'{!! $value->id !!}',
-                            path:'/lib/jQuery-qqFace/arclist/'
-                        });
-                    </script>
-                    <div class="ri_submit">确定</div>
-                </div>
-                @foreach($reply[$key."_reply"] as $rkey=>$rvalue)
-                @if($loop->index>=3)
-                <div class="ic-reply" style="display: none;">
-                    @else
-                    <div class="ic-reply">
-                        @endif
-                        <img src="{!! $rvalue->headimg !!}" class="headImg">
-                        <div class="reply-main">
-                            <div class="reply-header">{!! $rvalue->name !!}<span class="small">{!! $rvalue->time !!}</span></div>
-                            <div class="reply-content">{!! $rvalue->text !!}</div>
+            <#list comment?keys as key>
+                <div class="cl-item">
+                    <img src="${ e[key].headimg }" class="headImg">
+                    <div class="item-content">
+                        <div class="ic-header">${ e[key].name }<span class="small">${ e[key].time }</span></div>
+                        <div class="ic-main">${ e[key].text }</div>
+                        <div class="ic-footer">
+                            <a href="javascript:void(0);">支持</a>&nbsp;(${ e[key].suport })
+                            <span class="if_seperator">|</span>
+                            <a href="javascript:void(0);">反对</a>&nbsp;(${ e[key].object })
+                            <span class="if_seperator">|</span>
+                            <a href="javascript:void(0);" onclick="$(this).parent().next().toggleClass('eject')">回复</a>
                         </div>
-                    </div>
-                    @endforeach
-                    @if(count($reply[$key."_reply"])>3)
-                    <div class="ic-reply-footer">
-                        <a href="javascript:void(0)" onclick="$(this).parents('.item-content').find('.ic-reply').show()">查看全部({!! count($reply[$key."_reply"]) !!})</a>
-                        <a href="javascript:void(0)" onclick="$(this).parents('.item-content').find('.ic-reply').slice(3).hide()">收起</a>
-                    </div>
-                    @endif
-                </div>
-            </div>
-            @endforeach
+                        <div class="reply-input">
+                            <textarea rows="3" class="ri_text" id="${ e[key].id }"></textarea>
+                            <div class="ri_emotion"><img src="/img/laugh.png" style="width:24px;height:24px;"></div>
+                            <script>
+                                $('.ri_emotion img').qqFace({
+                                    assign:'${ e[key].id }',
+                                    path:'/lib/jQuery-qqFace/arclist/'
+                                });
+                            </script>
+                            <div class="ri_submit">确定</div>
+                        </div>
+                        <#list reply[key+"_reply"]?values as re>
+                            <#if x_index>=3>
+                                <div class="ic-reply" style="display: none;">
+                            <#else>
+                                <div class="ic-reply">
+                            </#if>
+                                    <img src="${ re.headimg }" class="headImg">
+                                    <div class="reply-main">
+                                        <div class="reply-header">${ re.name }<span class="small">${ re.time }</span></div>
+                                        <div class="reply-content">${ re.text }</div>
+                                    </div>
+                                </div>
+                        </#list>
+                        <#if reply[key+"_reply"]?size>3>
+                            <div class="ic-reply-footer">
+                                <a href="javascript:void(0)" onclick="$(this).parents('.item-content').find('.ic-reply').show()">查看全部(${ count($reply[$key+"_reply"]) })</a>
+                                <a href="javascript:void(0)" onclick="$(this).parents('.item-content').find('.ic-reply').slice(3).hide()">收起</a>
+                            </div>
+                        </#if>
 
-            <!--page-->
-            <div class="cl-pageControll">
-                <span class="pg-btn">当前位置：第5页</span>
-                <a class="pg-btn" href="javascript:void(0)">上一页</a>
-                <a class="pg-btn" href="javascript:void(0)">下一页</a>
-                <a class="pg-btn" href="javascript:void(0)">首页</a>
-                <a class="pg-btn" href="javascript:void(0)">尾页</a>
-            </div>
-            <div class="btn xpl-btn" onclick="location.href='#commentDiv'">写评论</div>
+                    </div>
+                </div>
+            </#list>
         </div>
+        <!--page-->
+        <div class="cl-pageControll">
+            <span class="pg-btn">当前位置：第5页</span>
+            <a class="pg-btn" href="javascript:void(0)">上一页</a>
+            <a class="pg-btn" href="javascript:void(0)">下一页</a>
+            <a class="pg-btn" href="javascript:void(0)">首页</a>
+            <a class="pg-btn" href="javascript:void(0)">尾页</a>
+        </div>
+        <div class="btn xpl-btn" onclick="location.href='#commentDiv'">写评论</div>
         <div style="height: 200px"></div>
     </div>
 </div>
@@ -867,14 +860,6 @@
         //
         $(".barageLine").css("margin-left",-video.currentTime*50);
         //
-        @foreach($barrage as $key=>$value)
-        if(Math.abs(video.currentTime-{!! $value->time !!})<0.5){
-            $(".r_list.active").removeClass("active");
-            var target=$(".r_list:eq({!! $loop->index !!})");
-            target.addClass("active");
-            $("#rightDiv").scrollTop(target.offset().top-$("#rightDiv").offset().top-$("#rightDiv").height()/2+$("#rightDiv").scrollTop());
-        }
-            @endforeach
     });
 
     var timeDrag = false;   /* Drag status */

@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 public class UserController {
 
-    @RequestMapping(path="/hello.do1",method = RequestMethod.GET)
+    @RequestMapping(path="/hello.do",method = RequestMethod.GET)
     @ResponseBody
     public String action(ModelAndView model) {
         return "hello world";

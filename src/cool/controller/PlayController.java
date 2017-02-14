@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PlayController
 {
-    @RequestMapping("/play")
-    public String getPlay(ModelMap model){
+    @RequestMapping("/play.do")
+    public String getPlay(String videoid,ModelMap model){
         /*
-        $video_id=$request->input("video",md5(sha1(1)));
         $result1=DB::select("select * from video where md5(sha1(id))=?",[$video_id]);
         if(count($result1)==0){
             return response()->view("errors/404");

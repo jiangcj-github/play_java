@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mysql>
+    <host>localhost</host>
+    <database>play</database>
+    <user>root</user>
+    <password>root</password>
+</mysql>

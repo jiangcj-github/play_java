@@ -1,12 +1,17 @@
 package cool.controller;
 
+import cool.util.DBConnPool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class MainController
@@ -21,6 +26,19 @@ public class MainController
 
     @RequestMapping("/list2.do")
     public String getList2(ModelMap model){
+        Connection conn=DBConnPool.getConnection();
+        String sql="select * from test";
+        try{
+            PreparedStatement ps=conn.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            List<String> arr=new ArrayList<String>();
+            while(rs.next()){
+                arr.add(rs.getString("col1"));
+            }
+            model.put("test",arr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "list2";
     }
 
