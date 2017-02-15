@@ -1,3 +1,3 @@
-<#list test as a>
-    a:${a}
+<#list info?keys as a>
+    ${a}:${info[a]}
 </#list>

@@ -1,11 +1,16 @@
 package cool.controller;
 
 import cool.util.DBConnPool;
+import cool.util.VideoUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,25 +30,18 @@ public class MainController
     }
 
     @RequestMapping("/list2.do")
-    public String getList2(ModelMap model){
-        Connection conn=DBConnPool.getConnection();
-        String sql="select * from test";
-        try{
-            PreparedStatement ps=conn.prepareStatement(sql);
-            ResultSet rs=ps.executeQuery();
-            List<String> arr=new ArrayList<String>();
-            while(rs.next()){
-                arr.add(rs.getString("col1"));
-            }
-            model.put("test",arr);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "list2";
+    public void getList2(HttpServletResponse response) throws IOException {
+        byte[] data=VideoUtil.getVideoFrame("mv/1.mp4",2,256,256);
+        response.setContentType("image/jpg");
+        OutputStream stream = response.getOutputStream();
+        stream.write(data);
+        stream.close();
     }
 
     @RequestMapping("/list3.do")
     public String getList3(ModelMap model){
+
+        model.put("info",VideoUtil.getVideoInfo("mv/1.mp4"));
         return "list3";
     }
 

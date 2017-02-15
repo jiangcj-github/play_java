@@ -4,7 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--配置spring-->
+    <!-- 指定Spring Bean的配置文件所在目录,默认为/WEB-INF/applicationContext.xml,如果使用默认值，则必须新建applicationContext.xml -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -24,10 +28,13 @@
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
-    <!-- 指定Spring Bean的配置文件所在目录,默认为/WEB-INF/applicationContext.xml,如果使用默认值，则必须新建applicationContext.xml -->
+    <!--存储项目路径-->
     <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml</param-value>
+        <param-name>webAppRootKey</param-name>
+        <param-value>demo.webapp</param-value>
     </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+    </listener>
 
 </web-app>
