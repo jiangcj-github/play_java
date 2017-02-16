@@ -1,5 +1,6 @@
 package cool.controller;
 
+import cool.model.Video;
 import cool.util.DBConnPool;
 import cool.util.VideoUtil;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,6 @@ public class MainController
     @RequestMapping("/list3.do")
     public String getList3(ModelMap model){
 
-        model.put("info",VideoUtil.getVideoInfo("mv/1.mp4"));
         return "list3";
     }
 

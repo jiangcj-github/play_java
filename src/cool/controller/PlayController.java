@@ -1,15 +1,65 @@
 package cool.controller;
 
+import cool.dao.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PlayController
 {
-    @RequestMapping("/play.do")
-    public String getPlay(String videoid,ModelMap model){
+
+    @RequestMapping("/poster/{imageId}")
+    public void getPoster(@PathVariable int imageId, HttpServletResponse response){
+        ImageDao dao=new ImageDao();
+        Map<String,Object> img=dao.getImageById(imageId);
+        try {
+            OutputStream os=response.getOutputStream();
+            os.write((byte[])img.get("data"));
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/play/{videoId}")
+    public String getPlay(@PathVariable int videoId, ModelMap model){
+        VideoDao dao1=new VideoDao();
+        Map<String,Object> video=dao1.getVideoById(videoId);
+        BarrageDao dao2=new BarrageDao();
+        List<Map<String,Object>> barrages=dao2.getBarrageByVideoId(videoId);
+        CommentDao dao3=new CommentDao();
+        List<Map<String,Object>> comments=dao3.getCommentByVideoId(videoId);
+        ReplyDao dao4=new ReplyDao();
+        List<Map<String,Object>> list4=dao4.getReplyByVideoId(videoId);
+        Map<Integer,Object> replies=new HashMap<Integer,Object>();
+        for(int n=0;n<list4.size();n++){
+            int comment_id=(int)list4.get(n).get("comment_id");
+            if(replies.containsKey(comment_id)){
+                List<Map<String,Object>> arr=(List<Map<String,Object>>)replies.get(comment_id);
+                arr.add(list4.get(n));
+            }
+            else{
+                List<Map<String,Object>> arr=new ArrayList<Map<String, Object>>();
+                arr.add(list4.get(n));
+                replies.put(comment_id,arr);
+            }
+        }
+        model.put("video",video);
+        model.put("comments",comments);
+        model.put("barrages",barrages);
+        model.put("replies",replies);
+
         /*
         $result1=DB::select("select * from video where md5(sha1(id))=?",[$video_id]);
         if(count($result1)==0){

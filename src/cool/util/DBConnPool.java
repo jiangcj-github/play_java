@@ -1,43 +1,20 @@
 package cool.util;
 
-import org.w3c.dom.Document;
-import javax.xml.parsers.DocumentBuilderFactory;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class DBConnPool {
-    private static String host;
-    private static String database;
-    private static String user;
-    private static String password;
+public class DBConnPool{
 
-    private static Connection conn = null;
+    private static ComboPooledDataSource ds = new ComboPooledDataSource();
 
-    static{
+    public static Connection getConnection() {
         try {
-            String path=DBConnPool.class.getClassLoader().getResource("/").getPath();
-            path=path.substring(0,path.indexOf("WEB-INF"));
-            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(path+"WEB-INF/mysql.xml");
-            host=doc.getElementsByTagName("host").item(0).getChildNodes().item(0).getNodeValue();
-            database=doc.getElementsByTagName("database").item(0).getChildNodes().item(0).getNodeValue();
-            user=doc.getElementsByTagName("user").item(0).getChildNodes().item(0).getNodeValue();
-            password=doc.getElementsByTagName("password").item(0).getChildNodes().item(0).getNodeValue();
-        } catch (Exception e) {
-            e.printStackTrace();
+            return ds.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    public static Connection getConnection(){
-        if(conn!=null){
-            return conn;
-        }
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://"+host+"/"+database, user, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
     }
 
 }

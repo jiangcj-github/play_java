@@ -1,4 +1,4 @@
 中文<br>
-<#list info?keys as key>
-    ${key}-${info[key]}
+<#list video?keys as key>
+    ${key}-${video[key]}
 </#list>

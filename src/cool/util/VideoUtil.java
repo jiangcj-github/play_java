@@ -1,19 +1,12 @@
 package cool.util;
 
-import freemarker.ext.beans.HashAdapter;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by mathew on 2017/2/15.
- */
 public class VideoUtil {
 
     public static Map<String,Object> getVideoInfo(String filename){
@@ -85,12 +78,6 @@ public class VideoUtil {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void main(String[] s) throws IOException {
-
-        //'Process p=Runtime.getRuntime().exec("ffmpeg -i 1.mp4 -y -f image2 -ss 1 -t 0.001 -s 352x240 a.jpg");
-
     }
 
 }
